@@ -7,6 +7,7 @@ between wikipedia pages and related news articles.
 ## Libraries
 This was a simple project to learn `tkinter`. 
 `NewsApiClient` is also used and requires a News API key.
+The python `wikipedia` library is also required.
 
 ## Running
 `python main.py`
