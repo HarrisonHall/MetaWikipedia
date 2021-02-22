@@ -1,6 +1,8 @@
 """main.py"""
 
 import tkinter as tk
+from tkinter import ttk
+from ttkthemes import ThemedStyle
 import wikipedia as wk
 from newsapi import NewsApiClient as nac
 import datetime
@@ -16,15 +18,17 @@ class MainWindow:
         self.main_page.title("MetaWikipedia")
         self.main_page.geometry("500x500")
 
-        self.left_pane = tk.PanedWindow(self.main_page)
-        self.right_pane = tk.PanedWindow(self.main_page)
+        self.style = ThemedStyle(self.main_page)
+        self.style.set_theme("scidblue")
 
-        
+        self.left_pane = ttk.PanedWindow(self.main_page)
+        self.right_pane = ttk.PanedWindow(self.main_page)
+
         # Left pane
-        self.search = tk.Button(self.left_pane, text="Search", command=self.search_wikipedia)
+        self.search = ttk.Button(self.left_pane, text="Search", command=self.search_wikipedia)
         self.search.place(relx=0,rely=0,relheight=0.1,relwidth=0.5)
 
-        self.randomize_but = tk.Button(self.left_pane, text="Randomize", command=self.randomize)
+        self.randomize_but = ttk.Button(self.left_pane, text="Randomize", command=self.randomize)
         self.randomize_but.place(relx=0.5,rely=0,relheight=0.1,relwidth=0.5)
 
         self.search_box = tk.Text(self.left_pane)
@@ -36,11 +40,12 @@ class MainWindow:
         extra_list_choices = ["none", "categories", "pageid", "sections", "html"]
         self.extra_list_choice = tk.StringVar()
         self.extra_list_choice.set("none")
-        self.extra_list = tk.OptionMenu(self.left_pane,
-                                        self.extra_list_choice,
-                                        *extra_list_choices,
-                                        command=self.update_choice
-                                        )
+        self.extra_list = ttk.OptionMenu(
+            self.left_pane,
+            self.extra_list_choice,
+            *extra_list_choices,
+            command=self.update_choice
+        )
         self.extra_list.place(relx=0,rely=.6,relheight=.1,relwidth=1)
 
         self.other_text = tk.Text(self.left_pane)
@@ -48,16 +53,16 @@ class MainWindow:
 
 
         # Right pane
-        self.api_key_label = tk.Label(self.right_pane, text="API Key")
+        self.api_key_label = ttk.Label(self.right_pane, text="API Key")
         self.api_key_label.place(relx=0, rely=0, relheight=0.1, relwidth=.4)
 
-        self.api_key_entry = tk.Entry(self.right_pane, text="ABC...")
+        self.api_key_entry = ttk.Entry(self.right_pane, text="ABC...")
         self.api_key_entry.place(relx=.4, rely=0, relheight=0.1, relwidth=.6)
 
         self.news_box = tk.Text(self.right_pane)
         self.news_box.place(relx=0, rely=.1, relheight=.5, relwidth=1)
 
-        self.top_categories_label = tk.Label(self.right_pane, text="Top Categories")
+        self.top_categories_label = ttk.Label(self.right_pane, text="Top Categories")
         self.top_categories_label.place(relx=0,rely=0.6,relheight=0.1,relwidth=1)
 
         self.top_categories = tk.Text(self.right_pane)
